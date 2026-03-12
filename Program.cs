@@ -18,7 +18,7 @@ builder.Services.AddScoped<ICarsService, CarRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
-        policy => policy.WithOrigins("http://localhost:59591")
+        policy => policy.WithOrigins("https://angular-website-with-my-back-front.netlify.app/")
                         .AllowAnyHeader()
                         .AllowAnyMethod());
 });
