@@ -2,6 +2,9 @@ using Car.Data;
 using Car.Repository.Implementation;
 using Car.Repository.Service;
 using Microsoft.EntityFrameworkCore;
+using System;
+// Add this using directive for Npgsql support
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,15 +15,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CarsDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddScoped<ICarsService, CarRepository>();
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
-        policy => policy.WithOrigins("https://angular-website-with-my-back-front.netlify.app/")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
+        policy =>
+        {
+            policy.WithOrigins("https://angular-website-with-my-back-front.netlify.app")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+
 });
 
 var app = builder.Build();
