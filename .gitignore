@@ -1,0 +1,24 @@
+# Node.js modules
+node_modules/
+
+# Angular build output
+dist/
+
+# Visual Studio cache files
+.vs/
+*.vsidx
+
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# Environment variables
+.env
+
+# Logs and backups
+*.log
+*.bak
