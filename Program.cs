@@ -23,16 +23,18 @@ builder.Services.AddScoped<ICarsService, CarRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNetlify",
-        policy => policy.WithOrigins("https://angular-project-with-my-back-front.netlify.app/")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
+        policy => policy
+            .WithOrigins("https://angular-project-with-my-back-front.netlify.app") // ???? Netlify URL
+            .AllowAnyHeader()
+            .AllowAnyMethod());
 });
+
 
 
 
 var app = builder.Build();
 
-app.UseCors("AllowAngular");
+app.UseHttpsRedirection();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -44,6 +46,9 @@ if (app.Environment.IsDevelopment())
 //app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowNetlify");
+
 
 app.MapControllers();
 
