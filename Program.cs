@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CarsDbContext>(options =>
@@ -23,7 +23,7 @@ builder.Services.AddScoped<ICarsService, CarRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNetlify",
-        policy => policy.WithOrigins("http://angular-project-with-my-back-front.netlify.app/")
+        policy => policy.WithOrigins("https://angular-project-with-my-back-front.netlify.app/")
                         .AllowAnyHeader()
                         .AllowAnyMethod());
 });
